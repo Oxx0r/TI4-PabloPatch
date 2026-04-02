@@ -1,3 +1,5 @@
+![Vorschau](Mods/Images/httpssteamusercontentaakamaihdnetugc16634807375025943287D71D708A7A0510488AEE97186AC5A4DA66D8632.jpg)
+
 # TI4-PabloPatch (Tabletop Simulator) 🎭
 
 Ein grafischer Mod-Patch für die **Twilight Imperium IV** Implementation im Tabletop Simulator. Dieser Patch ersetzt diverse Texturen und Anführer-Gesichter durch das "Pablo"-Design.
