@@ -7,28 +7,14 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - name: Send Discord Webhook
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        run: |
-          # Alle Daten sicher in ein JSON verpacken
-          payload=$(jq -n \
-            --arg cnt "<@&1482100826154598572>" \
-            --arg ttl "🚀 Neues Release für ${{ github.event.repository.name }}!" \
-            --arg url "${{ github.event.release.html_url }}" \
-            --arg dsc "Version: ${{ github.event.release.tag_name }}\n\n${{ github.event.release.body }}" \
-            --arg img "https://githubusercontent.com{{ github.repository }}/main/Mods/Workshop/1288687076.png" \
-            '{
-              content: $cnt,
-              embeds: [{
-                title: $ttl,
-                url: $url,
-                description: $dsc,
-                color: 11027200,
-                image: { url: $img },
-                footer: { text: "Sent via Pablo Actions" }
-              }]
-            }')
-
-          # Senden an Discord (Direkte Übergabe des Payloads)
-          echo "$payload" | curl -X POST -H "Content-Type: application/json" -d @- "$DISCORD_WEBHOOK"
+      - name: Discord Webhook Action
+        uses: tsickert/discord-webhook@v6.0.0
+        with:
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
+          content: "<@&1482100826154598572>"
+          embed-title: "🚀 Neues Release für ${{ github.event.repository.name }}!"
+          embed-url: "${{ github.event.release.html_url }}"
+          embed-description: "**Version:** `${{ github.event.release.tag_name }}`\n\n${{ github.event.release.body }}"
+          embed-color: 11027200
+          embed-image-url: "https://githubusercontent.com{{ github.repository }}/main/Mods/Workshop/1288687076.png"
+          embed-footer-text: "Sent via Pablo Actions"
