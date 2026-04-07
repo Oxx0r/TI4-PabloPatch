@@ -1,7 +1,7 @@
 name: Discord Notification
 on:
   release:
-    types: [published]
+    types: [published, edited]
 
 jobs:
   notify:
@@ -9,30 +9,34 @@ jobs:
     steps:
       - name: Send Discord Webhook
         env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           RELEASE_BODY: ${{ github.event.release.body }}
+          REPO_NAME: ${{ github.event.repository.name }}
+          RELEASE_URL: ${{ github.event.release.html_url }}
+          TAG_NAME: ${{ github.event.release.tag_name }}
+          REPO_FULL: ${{ github.repository }}
         run: |
-          # Bild-URL korrigiert (raw.githubusercontent.com)
-          IMAGE_URL="https://githubusercontent.com{{ github.repository }}/main/Mods/Workshop/1288687076.png"
-          
-          # Fix für Zeilenumbrüche im JSON
-          JSON_BODY=$(jq -n \
-            --arg content "<@&1482100826154598572>" \
-            --arg title "🚀 Neues Release für ${{ github.event.repository.name }}!" \
-            --arg url "${{ github.event.release.html_url }}" \
-            --arg desc "Version: ${{ github.event.release.tag_name }}\n\n$RELEASE_BODY" \
+          # Bild-URL sicher zusammenbauen
+          IMAGE_URL="https://githubusercontent.com{REPO_FULL}/main/Mods/Workshop/1288687076.png"
+
+          # JSON mit jq bauen (sehr sicher gegen Sonderzeichen und Zeilenumbrüche)
+          payload=$(jq -n \
+            --arg cnt "<@&1482100826154598572>" \
+            --arg ttl "🚀 Neues Release für $REPO_NAME!" \
+            --arg url "$RELEASE_URL" \
+            --arg dsc "Version: $TAG_NAME\n\n$RELEASE_BODY" \
             --arg img "$IMAGE_URL" \
             '{
-              content: $content,
+              content: $cnt,
               embeds: [{
-                title: $title,
+                title: $ttl,
                 url: $url,
-                description: $desc,
+                description: $dsc,
                 color: 11027200,
                 image: { url: $img },
                 footer: { text: "Sent via Pablo Actions" }
               }]
             }')
 
-          curl -H "Content-Type: application/json" \
-          -d "$JSON_BODY" \
-          ${{ secrets.DISCORD_WEBHOOK }}
+          # Senden an Discord
+          curl -X POST -H "Content-Type: application/json" -d "$payload" "$DISCORD_WEBHOOK"
