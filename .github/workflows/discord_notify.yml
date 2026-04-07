@@ -8,24 +8,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send Discord Webhook
+        env:
+          RELEASE_BODY: ${{ github.event.release.body }}
         run: |
-          # Dynamische Bild-URL basierend auf dem aktuellen Repo und Branch
-          IMAGE_URL="https://githubusercontent.com{{ github.repository }}/${{ github.event.release.target_commitish }}/Mods/Workshop/1288687076.png"
+          # Bild-URL korrigiert (raw.githubusercontent.com)
+          IMAGE_URL="https://githubusercontent.com{{ github.repository }}/main/Mods/Workshop/1288687076.png"
           
+          # Fix für Zeilenumbrüche im JSON
+          JSON_BODY=$(jq -n \
+            --arg content "<@&1482100826154598572>" \
+            --arg title "🚀 Neues Release für ${{ github.event.repository.name }}!" \
+            --arg url "${{ github.event.release.html_url }}" \
+            --arg desc "Version: ${{ github.event.release.tag_name }}\n\n$RELEASE_BODY" \
+            --arg img "$IMAGE_URL" \
+            '{
+              content: $content,
+              embeds: [{
+                title: $title,
+                url: $url,
+                description: $desc,
+                color: 11027200,
+                image: { url: $img },
+                footer: { text: "Sent via Pablo Actions" }
+              }]
+            }')
+
           curl -H "Content-Type: application/json" \
-          -d '{
-            "content": "<@&1482100826154598572>",
-            "embeds": [{
-              "title": "🚀 Neues Release für ${{ github.event.repository.name }}!",
-              "url": "${{ github.event.release.html_url }}",
-              "description": "**Version:** `${{ github.event.release.tag_name }}`\n\n${{ github.event.release.body }}",
-              "color": 11027200,
-              "image": {
-                "url": "'"$IMAGE_URL"'"
-              },
-              "footer": {
-                "text": "Sent via Pablo Actions"
-              }
-            }]
-          }' \
+          -d "$JSON_BODY" \
           ${{ secrets.DISCORD_WEBHOOK }}
