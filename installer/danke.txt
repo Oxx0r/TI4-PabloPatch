@@ -1,0 +1,25 @@
+=====================================================
+          PABLOFIZIERUNG ABGESCHLOSSEN!
+=====================================================
+
+Glückwunsch! Der TI4 Pablo-Patch wurde erfolgreich 
+installiert.
+
+WAS JETZT ZU TUN IST:
+-----------------------------------------------------
+1. Starte den Tabletop Simulator (TTS).
+2. Lade dein Twilight Imperium IV Savegame oder Mod.
+3. Genieße das neue Pablo-Design!
+
+HINWEIS:
+-----------------------------------------------------
+Falls Texturen nicht sofort erscheinen, stelle sicher, 
+dass "Mod Caching" in den TTS-Einstellungen 
+aktiviert ist oder starte das Spiel einmal neu.
+
+Vielen Dank, dass du diesen Patch nutzt! 
+Möge Pablo mit dir sein.
+
+=====================================================
+          VIEL SPASS BEIM SPIELEN! 🚀
+=====================================================
