@@ -12,9 +12,9 @@ jobs:
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
           content: "<@&1482100826154598572>"
-          embed-title: "🚀 Neues Release für ${{ github.event.repository.name }}!"
+          embed-title: "🚀 Neues Release für TI4-PabloPatch!"
           embed-url: "${{ github.event.release.html_url }}"
           embed-description: "**Version:** `${{ github.event.release.tag_name }}`\n\n${{ github.event.release.body }}"
           embed-color: 11027200
-          embed-image-url: "https://githubusercontent.com{{ github.repository }}/main/Mods/Workshop/1288687076.png"
+          embed-image-url: "https://github.com/Oxx0r/TI4-PabloPatch/raw/main/Mods/Workshop/1288687076.png"
           embed-footer-text: "Sent via Pablo Actions"
