@@ -1,0 +1,31 @@
+name: Discord Notification
+on:
+  release:
+    types: [published]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Discord Webhook
+        run: |
+          # Dynamische Bild-URL basierend auf dem aktuellen Repo und Branch
+          IMAGE_URL="https://githubusercontent.com{{ github.repository }}/${{ github.event.release.target_commitish }}/Mods/Workshop/1288687076.png"
+          
+          curl -H "Content-Type: application/json" \
+          -d '{
+            "content": "<@&1482100826154598572>",
+            "embeds": [{
+              "title": "🚀 Neues Release für ${{ github.event.repository.name }}!",
+              "url": "${{ github.event.release.html_url }}",
+              "description": "**Version:** `${{ github.event.release.tag_name }}`\n\n${{ github.event.release.body }}",
+              "color": 11027200,
+              "image": {
+                "url": "'"$IMAGE_URL"'"
+              },
+              "footer": {
+                "text": "Sent via Pablo Actions"
+              }
+            }]
+          }' \
+          ${{ secrets.DISCORD_WEBHOOK }}
