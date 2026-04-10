@@ -1,6 +1,6 @@
 ![Vorschau](Mods/Workshop/1288687076.png)
 
-# BSG-PabloPatch (Tabletop Simulator) 🎭
+# TI4-PabloPatch (Tabletop Simulator) 🎭
 
 Ein grafischer Mod-Patch für die **Twilight Imperium IV** Implementation im Tabletop Simulator. Dieser Patch ersetzt diverse Texturen und Charakter-Gesichter durch das "Pablo"-Design.
 
