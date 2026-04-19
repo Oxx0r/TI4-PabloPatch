@@ -17,4 +17,4 @@ jobs:
           embed-description: "**Version:** `${{ github.event.release.tag_name }}`\n\n${{ github.event.release.body }}"
           embed-color: 11027200
           embed-image-url: "https://github.com/Oxx0r/TI4-PabloPatch/raw/main/Mods/Workshop/1288687076.png"
-          embed-footer-text: "Sent via Pablo Actions"
+          embed-footer-text: "Sponsored by The Emirates of Hacan"
