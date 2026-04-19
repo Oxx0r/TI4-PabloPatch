@@ -11,14 +11,14 @@ DisableDirPage=no
 UsePreviousAppDir=no
 
 ; Pfade zu den Personalisierungs-Dateien im Unterordner "installer"
-SetupIconFile=installer\pablo.ico
+SetupIconFile=installer\ti_pablo.ico
 WizardImageFile=installer\banner.bmp
 WizardSmallImageFile=installer\logo_small.bmp
 InfoBeforeFile=installer\readme_vorher.txt
 InfoAfterFile=installer\danke.txt
 
 ; Icon für die Windows-Systemsteuerung
-UninstallDisplayIcon={app}\pablo.ico
+UninstallDisplayIcon={app}\ti_pablo.ico
 
 Compression=lzma2
 SolidCompression=yes
@@ -34,4 +34,4 @@ Type: files; Name: "{userdocs}\My Games\Tabletop Simulator\Mods\Images Raw\*"
 Source: "Mods\*"; DestDir: "{app}"; Flags: recursesubdirs createallsubdirs
 
 ; Das Icon wird mit kopiert, damit UninstallDisplayIcon darauf zugreifen kann
-Source: "installer\pablo.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "installer\ti_pablo.ico"; DestDir: "{app}"; Flags: ignoreversion
