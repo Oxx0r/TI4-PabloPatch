@@ -23,7 +23,7 @@ UninstallDisplayIcon={app}\ti_pablo.ico
 Compression=lzma2
 SolidCompression=yes
 OutputDir=.
-OutputBaseFilename=BSG_Pablo_Patch_Installer
+OutputBaseFilename=TI4_Pablo_Patch_Installer
 
 [InstallDelete]
 ; Löscht den "Images Raw"-Cache, damit TTS die neuen Texturen sofort erkennt
