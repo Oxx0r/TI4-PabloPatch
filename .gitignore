@@ -1,3 +1,4 @@
 pull.*
 push_update.*
 tmp/
+*.exe
